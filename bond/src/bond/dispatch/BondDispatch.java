@@ -12,7 +12,7 @@ import bond.controller.*;
 /**
  * Servlet implementation class BondDispatch
  */
-@WebServlet("/.bond")
+@WebServlet("*.bond")
 public class BondDispatch extends HttpServlet {
 	public HashMap<String, BondInter> map;
 	/**
@@ -59,12 +59,11 @@ public class BondDispatch extends HttpServlet {
 		String domain = req.getContextPath();
 		String realReq = full.substring(domain.length());
 		BondInter val = map.get(realReq);
-		
 		Boolean bool = false;
 		
 		resp.setCharacterEncoding("UTF-8");
 		
-		req.setAttribute("isRedirect", true);
+		req.setAttribute("isRedirect", false);
 		String view = val.exec(req, resp);
 		
 		bool = (Boolean) req.getAttribute("isRedirect");
@@ -75,11 +74,12 @@ public class BondDispatch extends HttpServlet {
 		}else if(bool) {
 			resp.sendRedirect(view);
 		}else if(!bool) {
-			String suffix = "/WEB-INF/views/";
-			String prefix = ".jsp";
+			String prefix = "/WEB-INF/views/";
+			String suffix = ".jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(prefix + view + suffix);
 			rd.forward(req, resp);
 		}
+		
 		
 		
 		

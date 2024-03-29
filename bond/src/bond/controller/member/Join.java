@@ -17,7 +17,7 @@ public class Join implements BondInter {
 			return "/main.bond";
 		}
 		
-		String view = "/member/join";
+		String view = "member/join";
 		return view;
 	}
 
