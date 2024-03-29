@@ -15,19 +15,19 @@
 		$('#login').click(function(){
 			var sid = '${SID}';
 			if(!sid || sid == 'null'){
-				$(location).attr('href','/member/login.candy');
+				$(location).attr('href','/member/login.bond');
 			}else{
 				alert('이미 로그인 했습니다.')
 			}
 		});
 		$('#logout').click(function(){
-			$(location).attr('href','/member/logoutProc.candy');
+			$(location).attr('href','/member/logoutProc.bond');
 		});
 		$('#join').click(function(){
 			// 로그인 여부 검사
 			var sid = '${SID}';
 			if(!sid || sid == 'null'){
-				$(location).attr('href', '/member/join.candy');
+				$(location).attr('href', '/member/join.bond');
 			} else{
 				return;
 			}

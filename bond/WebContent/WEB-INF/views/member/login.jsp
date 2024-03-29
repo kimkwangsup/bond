@@ -13,10 +13,10 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	$('#home').click(function(){
-    		$(location).attr('href', '/main.candy');
+    		$(location).attr('href', '/main.bond');
     	});
     	$('#join').click(function(){
-    		$(location).attr('href', '/member/join.candy');
+    		$(location).attr('href', '/member/join.bond');
     	});
     	$('#login').click(function(){
     		// 데이터 읽고
@@ -32,7 +32,7 @@
     			return;
     		}
     		
-    		$('#frm').attr('method', 'get').attr('action', '/member/loginProc.candy');
+    		$('#frm').attr('method', 'get').attr('action', '/member/loginProc.bond');
     		$('#frm').submit();
     		
     	});

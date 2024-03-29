@@ -107,7 +107,7 @@
                 }
             });
             $('#home').click(function(){
-            	$(location).attr('href', '/main.candy');
+            	$(location).attr('href', '/main.bond');
             });
             // 아이디 체크이벤트
             $('#chkBtn').click(function(){
@@ -140,7 +140,7 @@
 	                $('#idmsg:not(".w3-hide")').addClass('w3-hide');
 */
 	                $.ajax({
-	                    url: 'http://localhost/member/idCheck.candy',
+	                    url: 'http://localhost/member/idCheck.bond',
 	                    type: 'post',
 	                    dataType: 'text',
 	                    data: {
@@ -202,7 +202,7 @@
 <body>
     <div class="w3-content mxw650 w3-center " id="mainFr">
         <h1 class="w3-pale-blue w3-padding w3-card-4 w3-round-large">회원가입</h1>
-        <form method="get" action="/member/joinProc.candy" name="frm" id="frm" 
+        <form method="get" action="/member/joinProc.bond" name="frm" id="frm" 
                 class="w3-col w3-light-grey mgt20 w3-card-4 w3-padding pdh30">
             <div class="w3-col w3-padding">
                 <label for="name" class="w3-col m3 lbl w3-text-gray w3-right-align">이 름 : </label>
