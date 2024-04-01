@@ -15,189 +15,127 @@
     }
 </style>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            // 비밀번호 관련 메세지 태그 숨김 처리
-            var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*_\-+/])([a-zA-Z0-9!@#$%^*_\+/]{8,15})$/;
-            $('#pwmsg, #repwmsg').css('display', 'none');
-            $('#mAvt, #fAvt').css('display','none');
-            // 비밀번호 정규식 검사
-            /*
-                우리의 경우
-                비밀번호가
-                    대문자 1개, 소문자 1개, 숫자 1개, 특수문자 1개가 포함되는
-                8 ~ 15 글자로 이루어진 비밀번호를 사용하기로 했다.
+<script type="text/javascript">
+       $(document).ready(function(){
+           // 비밀번호 관련 메세지 태그 숨김 처리
+           var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*_\-+/])([a-zA-Z0-9!@#$%^*_\+/]{8,15})$/;
+           $('#pwmsg, #repwmsg').css('display', 'none');
+           $('#mAvt, #fAvt').css('display','none');
+           
 
-                참고 ]
-                    전방탐색자
-                    ==> 특정 문자를 기준으로 그 문자의 앞을 지정한 패턴에 맞는 문자가 있는지 찾아보는 방식
+           // 이메일 유효성 검사
+           // 이메일 아이디는 대소문자와 숫자 그리고 특수문자(*&$#!+%.) 를 사용할 수 있도록 한다.
+           $('#mail').change(function(){
 
-                    형식 ]
-                        ?=[1][2]
+           });
 
-                            [1] : 특정문자
-                            [2] : 찾을패턴
+           // 전화번호 유효성 검사
+           $('#tel').change(function(){
 
-                    우리의 경우
-                    어떤 문자가 입력될 지 알수 없으므로
-                    모든 문자의 앞을 찾아보기로 하자
-                    이때 각 조건은 AND 로 연결되어있다.
+           });
 
-            */
-            // 한 글자가 입력될 때 마다 이벤트 처리를 해줘야 하므로 keyup 이벤트로 처리한다.
+           // 성별 체크 이벤트
+           $(document.frm.gen).change(function(){
+               var sgen = $(this).val();
+
+               if(sgen == 'F'){
+                   // 성별을 여자로 선택한 경우
+                   $('#mAvt').stop().slideUp(300, function(){
+                       $('#fAvt').slideDown(300);
+                   });
+               } else if(sgen == 'M'){
+                   // 성별을 남자로 선택한 경우
+                   $('#fAvt').stop().slideUp(300, function(){
+                       $('#mAvt').slideDown(300);
+                   });
+               }
+           });
+           $('#home').click(function(){
+           	$(location).attr('href', '/main.bond');
+           });
+           
+           // 아이디 체크이벤트
+           $('#chkBtn').click(function(){
+               var sid = $('#id').val();
+               if(!sid){
+                   $('#id').focus();
+                   return;
+               }
+               if(!sid){
+                   // id에 입력된 값이 없는 경우
+                   // id에 포커스이동
+                   $('#id').focus();
+                   return;
+               }
+               // 정규표현식
+               var pattern = /^[a-z][a-z0-9]{5,9}$/;
+
+               // 메세지 태그의 택스트색상 클래스 모두 삭제하고
+               // $('#idmsg').removeClass('w3-text-blue w3-text-red');
+               // 정규표현식 검사
 /*
-            $('#pw').keyup(function(){
-                
-                var spw = $(this).val();
-                
-                var result = pattern.test(spw);
-                $('#pwmsg').removeClass('w3-text-red w3-text-blue');
-                if(result){
-                    // 비밀번호 형식에 맞는 경우
-                    $('#pwmsg').html('비밀번호 형식에 맞습니다.');
-                    $('#pwmsg').addClass('w3-text-blue').css('display','block');
-                }else{
-                    // 형식에 맞지 않는 경우
-                    $('#pwmsg').html('비밀번호 형식에 맞지 않습니다.');
-                    $('#pwmsg').addClass('w3-text-red').css('display','block');
-                }
-                $('#repw').keyup(function(){
-                    var srepw = $(this).val();
-                    $('#repwmsg').removeClass('w3-text-red w3-text-blue');
-                    if(srepw == spw){
-                        // 일치할경우
-                        $('#repwmsg').html('비밀번호가 일치합니다.');
-                        $('#repwmsg').addClass('w3-text-blue').css('display','block');
-                    }else{
-                        // 일치하지 않을경우
-                        $('#repwmsg').html('비밀번호가 일치하지 않습니다.');
-                        $('#repwmsg').addClass('w3-text-red').css('display','block');
-                    }
-           		 });
-       		 });
-*/        
+               if(pattern.test(sid)){
+                   // 검사에 통과한 경우 서버로 전송해서 결과 받고....
+                   // 이 부분은 나중에 처리
+                   
 
-            
-
-            // 이메일 유효성 검사
-            // 이메일 아이디는 대소문자와 숫자 그리고 특수문자(*&$#!+%.) 를 사용할 수 있도록 한다.
-            $('#mail').change(function(){
-
-            });
-
-            // 전화번호 유효성 검사
-            $('#tel').change(function(){
-
-            });
-
-            // 성별 체크 이벤트
-            $(document.frm.gen).change(function(){
-                var sgen = $(this).val();
-
-                if(sgen == 'F'){
-                    // 성별을 여자로 선택한 경우
-                    $('#mAvt').stop().slideUp(300, function(){
-                        $('#fAvt').slideDown(300);
-                    });
-                } else if(sgen == 'M'){
-                    // 성별을 남자로 선택한 경우
-                    $('#fAvt').stop().slideUp(300, function(){
-                        $('#mAvt').slideDown(300);
-                    });
-                }
-            });
-            $('#home').click(function(){
-            	$(location).attr('href', '/main.bond');
-            });
-            // 아이디 체크이벤트
-            $('#chkBtn').click(function(){
-                var sid = $('#id').val();
-                if(!sid){
-                    $('#id').focus();
-                    return;
-                }
-                if(!sid){
-                    // id에 입력된 값이 없는 경우
-                    // id에 포커스이동
-                    $('#id').focus();
-                    return;
-                }
-                // 정규표현식
-                var pattern = /^[a-z][a-z0-9]{5,9}$/;
-
-                // 메세지 태그의 택스트색상 클래스 모두 삭제하고
-                // $('#idmsg').removeClass('w3-text-blue w3-text-red');
-                // 정규표현식 검사
-/*
-                if(pattern.test(sid)){
-                    // 검사에 통과한 경우 서버로 전송해서 결과 받고....
-                    // 이 부분은 나중에 처리
-                    
-
-                    $('#idmsg').text('사용가능한 아이디 입니다.');
-                    $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-blue');
-                    $('#idmsg').css('display', 'block');
-	                $('#idmsg:not(".w3-hide")').addClass('w3-hide');
+                   $('#idmsg').text('사용가능한 아이디 입니다.');
+                   $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-blue');
+                   $('#idmsg').css('display', 'block');
+                $('#idmsg:not(".w3-hide")').addClass('w3-hide');
 */
-	                $.ajax({
-	                    url: 'http://localhost/member/idCheck.bond',
-	                    type: 'post',
-	                    dataType: 'text',
-	                    data: {
-	                        id: sid
-	                    },
-	                    success: function(data){
-	
-	                        if(data == 'YES'){
-	                            $('#idmsg').html('사용 가능한 아이디 입니다.').removeClass('w3-text-red w3-text-blue').addClass('w3-text-blue').removeClass('w3-hide');
-	                        } else {
-	                            $('#idmsg').html('이미 사용중인 아이디 입니다.').removeClass('w3-text-red w3-text-blue').addClass('w3-text-red').removeClass('w3-hide');
-	                        }
-	                    },
-	                    error: function(){
-	                        alert('서버 통신 에러');
-	                    }
-	                });
-/*
-                } else {
-                    // 메세지 출력하고
-                    $('#idmsg').text('아이디 형식에 맞지 않습니다.');
-                    $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-red');
-                    $('#idmsg').css('display', 'block');
-                    // 먼저 입력된 내용 삭제하고
-                    $('#id').val('');
-                    // 포커스 이동하고
-                    $('#id').focus();
-                    // 함수 종료
-                    return;
-                }
-*/
-            });
-            $('#join').click(function(){
-            	var sid = document.frm.id.value;
-            	var spw = document.frm.pw.value;
-            	var srepw = document.frm.repw.value;
-            	if(spw != srepw){
-            		document.frm.repw.value = '';
-            		document.frm.repw.focus();
-            		alert('비밀번호가 일치하지 않습니다.');
-            		return;
-            	}
-            	var smail = document.frm.mail.value;
-            	var stel = document.frm.tel.value;
-            	var sgen = document.querySelectorAll('[name="gen"]:checked')[0].value;
-            	var sano = document.querySelectorAll('[name="avt"]:checked')[0].value;
-            	
-            	if(!sid || !spw || !smail || !stel || !sgen || !sano){
-            		return;
-            	}
-            	
-            	$('#frm').submit();
-            });
+               $.ajax({
+                   url: 'http://localhost/member/idCheck.bond',
+                   type: 'post',
+                   dataType: 'json',
+                   data: {
+                       id: sid
+                   },
+                   success: function(obj){
+                	   obj = obj.result;
+                       if(obj == 'YES'){
+                           $('#idmsg').html('사용 가능한 아이디 입니다.');
+                           $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-blue').removeClass('w3-hide');
+                       }
+                       
+                       if(obj != 'YES'){
+                           $('#idmsg').html('이미 사용중인 아이디 입니다.');
+                          $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-red').removeClass('w3-hide');
+                       }
+                	   
+                   },
+                   error: function(){
+                       alert('서버 통신 에러');
+                   }
+               });
 
-        });
-        
-    </script>
+           });
+           
+           $('#join').click(function(){
+           	var sid = document.frm.id.value;
+           	var spw = document.frm.pw.value;
+           	var srepw = document.frm.repw.value;
+           	if(spw != srepw){
+           		document.frm.repw.value = '';
+           		document.frm.repw.focus();
+           		alert('비밀번호가 일치하지 않습니다.');
+           		return;
+           	}
+           	var smail = document.frm.mail.value;
+           	var stel = document.frm.tel.value;
+           	var sgen = document.querySelectorAll('[name="gen"]:checked')[0].value;
+           	var sano = document.querySelectorAll('[name="avt"]:checked')[0].value;
+           	
+           	if(!sid || !spw || !smail || !stel || !sgen || !sano){
+           		return;
+           	}
+           	
+           	$('#frm').submit();
+           });
+
+       });
+       
+   </script>
 </head>
 <body>
     <div class="w3-content mxw650 w3-center " id="mainFr">

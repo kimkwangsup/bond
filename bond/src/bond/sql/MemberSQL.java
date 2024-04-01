@@ -31,7 +31,7 @@ public class MemberSQL {
 		break;	
 		case ADD_MEMB:
 			buff.append("INSERT INTO ");
-			buff.append("	member(mno, name, id, pw, mail, tel, gen, ano) ");
+			buff.append("	member(mno, name, id, pw, mail, tel, gen, avatar) ");
 			buff.append("VALUES( ");
 			buff.append("		mnoseq.NEXTVAL, ?, ?, ?, ?, ?, ?, ? ");
 			buff.append(") ");

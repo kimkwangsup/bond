@@ -16,9 +16,10 @@ public class IdCheck implements BondInter {
 		String sid = req.getParameter("id");
 		MemberDao mDao = new MemberDao();
 		int cnt = mDao.getIdCnt(sid);
-		String view = "YES";
+		String view = "{\"result\": \"YES\"}";
+		
 		if(cnt != 0 ) {
-			view = "NO";
+			view = "{\"result\": \"NO\"}";
 		}
 		return view;
 	}

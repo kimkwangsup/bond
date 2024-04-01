@@ -70,7 +70,7 @@ public class BondDispatch extends HttpServlet {
 		
 		if(bool == null) {
 			PrintWriter pw = resp.getWriter();
-			pw.println();
+			pw.println(view);
 		}else if(bool) {
 			resp.sendRedirect(view);
 		}else if(!bool) {
