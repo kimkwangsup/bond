@@ -97,18 +97,15 @@
                            $('#idmsg').html('사용 가능한 아이디 입니다.');
                            $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-blue').removeClass('w3-hide');
                        }
-                       
-                       if(obj != 'YES'){
+                       else{
                            $('#idmsg').html('이미 사용중인 아이디 입니다.');
                           $('#idmsg').removeClass('w3-text-red w3-text-blue').addClass('w3-text-red').removeClass('w3-hide');
                        }
-                	   
                    },
                    error: function(){
                        alert('서버 통신 에러');
                    }
                });
-
            });
            
            $('#join').click(function(){

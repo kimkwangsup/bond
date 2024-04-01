@@ -61,12 +61,21 @@
 
 # 회원가입 처리 요청
 요청내용 : /member/joinProc.bond
-파라미터 : name, id, pw, mail, tel, gen, avt
+파라미터 : name, id, pw, mail, tel, gen, avatar
 컨트롤러 : bond.controller.member.JoinProc
 응답문서 : 
 			redirect ]
 				성공 : /main.bond
 				실패 : /member/join.bond
+
+-----------------------------------------------------------------------------------------------------
+# 방명록 관련 요청 설계
+
+# 방명록 리스트 보기 요청
+요청내용 : /gboard/gboard.bond
+파라미터 : 없음
+컨트롤러 : bond.controller.gboard.Gboard
+응답문서 : /WEB-INF/views/gboard/gboard.jsp
 
 
 
