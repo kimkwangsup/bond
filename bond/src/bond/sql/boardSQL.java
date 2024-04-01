@@ -1,6 +1,6 @@
 package bond.sql;
 
-public class GboardSQL {
+public class boardSQL {
 	public final int SEL_ALL_LIST = 1001;
 	public String getSQL(int code) {
 		StringBuffer buff = new StringBuffer();
