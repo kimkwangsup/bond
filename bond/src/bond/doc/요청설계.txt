@@ -77,6 +77,13 @@
 컨트롤러 : bond.controller.gboard.Gboard
 응답문서 : /WEB-INF/views/gboard/gboard.jsp
 
+# 방명록 글 등록 요청설계
+요청내용 : /gboard/gWriteProc.bond
+파라미터 : id, body
+컨트롤러 : bond.controller.gboard.GwriteProc
+응답문서 : 
+			redirect ] /gboard/gboard
+
 
 
 

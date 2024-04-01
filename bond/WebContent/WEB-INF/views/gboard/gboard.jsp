@@ -10,7 +10,18 @@
 <script type="text/javascript" src="/resources/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/colorClass.js"></script>
 <style type="text/css">
-
+	p {
+		margin: 0px!important
+	}
+	hr {
+		margin:	3px!important 
+	}
+	#wmodal{
+		display: none;
+	}
+	#msg{
+		display: block;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -29,13 +40,38 @@
 			$(location).attr('href', '/member/join.bond');
 		});
 		$('#wbtn').click(function(){
-			alert("응애");
+			$('#wmodal').css('display', 'block');
+		});
+		$('#close, #cbtn').click(function(){
+			document.frm.reset();
+			$('#wmodal').css('display', 'none');
+		});
+		$('#mclose, #cmbtn').click(function(){
+			$('#msg').css('display', 'none');
+		});
+		$('#write').click(function(){
+			// 데이터 유효성검사
+			
+			var sid = $(document.frm.id).val();
+			if(!sid || sid == 'null'){
+				// 로그인이 안되어있는 경우
+				// 로그인 페이지로 보낸다
+				$(location).attr('href', '/member/login.bond');
+			}
+			var body = $('#body').val();
+			if(!body){
+				// 내용 입력인 안된 상태
+				alert('내용을 입력해주세요.');
+				$('#body').focus();
+				return;
+			}
+			$('#frm').submit();
 		});
 	});
 </script>
 </head>
-<body>
-	<div class="w3-content mxw600 w3-center">
+<body style="background-color: gray">
+	<div class="w3-content mxw600">
 		<h1 class="w3-col w3-pale-green w3-center w3-padding w3-card-4 w3-round-large">Bond 방명록</h1>
 		<div class="w3-col">
 			<div class="w3-blue-gray w3-btn w3-left w3-small" id="home">처음화면</div>
@@ -50,13 +86,57 @@
 	</c:if>
 </c:if>
 		</div>
-		<div class="w3-col">
+		<div class="w3-col ">
 <c:forEach var="DATA" items="${LIST }">
-			<div class="w3-col w3-card-4 mgt10">
-				<div class="w3-left w3-padding "> ${DATA.gno} | ${DATA.id} | ${DATA.sdate} | ${DATA.body}</div>	
+			<div class="w3-col w3-card-4 mgt10 w3-teal" style="padding: 7px;">
+				<div class="w3-col" style="width: 110px; height: 100px; padding-right: 10px; border-right: 1px solid lightgrey">
+					<img src="/resources/image/avatar/${DATA.sname}" class="imgBox w3-left" >
+				</div>
+				<div class="w3-rest" style="padding-right: 10px;">
+					<div class="w3-col">
+						<p class="w3-half w3-left-align" style="padding-left:10px;"><strong>작성자 : ${DATA.id}</strong></p>
+						<p class="w3-half w3-right-align">작성일 : ${DATA.sdate}</p>
+					</div>
+					<hr class="w3-col">
+					<div class="w3-col w3-padding">
+						<pre class="w3-small">${DATA.body}</pre>
+					</div>
+				</div>
 			</div>
 </c:forEach>
 		</div>
 	</div>
+	<div id="wmodal" class="w3-modal">
+		<form method="post" action="/gboard/gWrightProc.bond" name="frm" id="frm" class="w3-modal-content mxw550">
+			<input type="hidden" name="id" value="${SID}">
+			<header class="w3-container w3-pale-green"> 
+				<span class="w3-btn w3-display-topright" id="close">&times;</span>
+				<h2 class="w3-center">방명록</h2>
+			</header>
+			<div class="w3-container w3-padding">
+				<textarea name="body" id="body" class="w3-input w3-border" style="resize: none" placeholder="글을 작성하세요."></textarea>
+			</div>
+			<footer class="w3-col">
+				<div class="w3-half w3-blue-gray w3-btn" id="write">작성</div>
+				<div class="w3-half w3-light-gray w3-btn" id="cbtn">취소</div>
+			</footer>
+		</form>
+	</div>
+<c:if test="${not empty MSG}">
+	<div id="msg" class="w3-modal">
+		<div class="w3-modal-content mxw550">
+			<header class="w3-container w3-pale-green"> 
+				<span class="w3-btn w3-display-topright" id="mclose">&times;</span>
+				<h2 class="w3-center">방명록 등록 결과</h2>
+			</header>
+			<div class="w3-container w3-padding">
+				<h3 class="w3-center">${MSG} - 방명록 작성 성공</h3>
+			</div>
+			<footer class="w3-col">
+				<div class="w3-col w3-dark-gray w3-btn" id="cmbtn">확인</div>
+			</footer>
+		</div>
+	</div>
+</c:if>
 </body>
 </html>

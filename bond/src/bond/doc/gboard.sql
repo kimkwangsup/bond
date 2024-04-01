@@ -52,3 +52,12 @@ WHERE
 ORDER BY
     wdate desc
 ;
+
+SELECT
+    COUNT(*)
+FROM
+    member m, gboard g
+WHERE
+    m.mno = g.writer
+    AND id = 'jennie'
+;
