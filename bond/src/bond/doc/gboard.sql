@@ -61,3 +61,11 @@ WHERE
     m.mno = g.writer
     AND id = 'jennie'
 ;
+
+SELECT
+    mno
+FROM
+    member
+WHERE
+    id = ?
+;

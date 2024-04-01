@@ -21,7 +21,11 @@ public class Gboard implements BondInter {
 		// 할일
 		// 세션검사
 		String sid = (String) req.getSession().getAttribute("SID");
-		
+		// 파라미터 꺼내고
+		String msg = req.getParameter("msg");
+		if(msg != null) {
+			req.setAttribute("MSG", msg);
+		}
 		// 데이터베이스 사용 준비
 		GboardDao gDao = new GboardDao();
 		if(sid != null) {

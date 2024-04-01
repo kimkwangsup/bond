@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<div id="wmodal" class="w3-modal">
-		<form method="post" action="/gboard/gWrightProc.bond" name="frm" id="frm" class="w3-modal-content mxw550">
+		<form method="post" action="/gboard/gWriteProc.bond" name="frm" id="frm" class="w3-modal-content mxw550">
 			<input type="hidden" name="id" value="${SID}">
 			<header class="w3-container w3-pale-green"> 
 				<span class="w3-btn w3-display-topright" id="close">&times;</span>
@@ -125,12 +125,24 @@
 <c:if test="${not empty MSG}">
 	<div id="msg" class="w3-modal">
 		<div class="w3-modal-content mxw550">
+<c:if test="${MSG eq 'OK'}">
 			<header class="w3-container w3-pale-green"> 
+</c:if>			
+<c:if test="${MSG ne 'OK'}">
+			<header class="w3-container w3-pale-red"> 
+</c:if>			
 				<span class="w3-btn w3-display-topright" id="mclose">&times;</span>
 				<h2 class="w3-center">방명록 등록 결과</h2>
 			</header>
 			<div class="w3-container w3-padding">
-				<h3 class="w3-center">${MSG} - 방명록 작성 성공</h3>
+				<h3 class="w3-center">
+<c:if test="${MSG eq 'OK'}">
+	방명록 등록에 성공했습니다.
+</c:if>
+<c:if test="${MSG ne 'OK'}">
+	방명록 등록에 실패했습니다.
+</c:if>
+				</h3>
 			</div>
 			<footer class="w3-col">
 				<div class="w3-col w3-dark-gray w3-btn" id="cmbtn">확인</div>
